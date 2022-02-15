@@ -19,7 +19,7 @@ int L3 = 68;      //Length from wrist to hand PLUS base centre to shoulder
 
 int req_kq1 = 0;
 int req_kq2 = 90;
-int req_kq3 = 50;
+int req_kq3 = 0;
 int req_kq4 = 50;
 
 int kq1 = 0;
@@ -57,7 +57,7 @@ void updateq2(int kin_ang){
 
 void updateq3(int kin_ang){
   int s3 = 180-kin_ang;
-  s3 = s3 + s3/6 - 35;
+  s3 = s3 +s3*0.13 -42;
   l3.write(s3);
 }
 
