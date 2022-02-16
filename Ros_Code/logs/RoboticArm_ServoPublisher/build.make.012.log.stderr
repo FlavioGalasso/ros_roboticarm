@@ -1,0 +1,10 @@
+[01m[K/home/osboxes/Desktop/rp_workspace/ros_roboticarm/Ros_Code/src/RoboticArm_ServoPublisher/src/main.cpp:[m[K In function ‘[01m[Kint main(int, char**)[m[K’:
+[01m[K/home/osboxes/Desktop/rp_workspace/ros_roboticarm/Ros_Code/src/RoboticArm_ServoPublisher/src/main.cpp:85:18:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K;[m[K’ before ‘[01m[Kquat3[m[K’
+   85 |     q3 = -(q2+q3)
+      |                  [01;31m[K^[m[K
+      |                  [32m[K;[m[K
+   86 |     [32m[Kquat3[m[K.setRPY(0,0,q3);
+      |     [32m[K~~~~~[m[K         
+make[2]: *** [CMakeFiles/RoboticArm_ServoPublisher_node.dir/build.make:63: CMakeFiles/RoboticArm_ServoPublisher_node.dir/src/main.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:185: CMakeFiles/RoboticArm_ServoPublisher_node.dir/all] Error 2
+make: *** [Makefile:141: all] Error 2

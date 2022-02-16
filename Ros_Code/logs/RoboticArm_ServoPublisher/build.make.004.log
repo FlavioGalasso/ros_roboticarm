@@ -1,0 +1,19 @@
+[35m[1mScanning dependencies of target RoboticArm_ServoPublisher_node[0m
+[ 50%] [32mBuilding CXX object CMakeFiles/RoboticArm_ServoPublisher_node.dir/src/main.cpp.o[0m
+[01m[K/home/osboxes/Desktop/rp_workspace/ros_roboticarm/Ros_Code/src/RoboticArm_ServoPublisher/src/main.cpp:[m[K In function ‘[01m[Kint main(int, char**)[m[K’:
+[01m[K/home/osboxes/Desktop/rp_workspace/ros_roboticarm/Ros_Code/src/RoboticArm_ServoPublisher/src/main.cpp:15:8:[m[K [01;31m[Kerror: [m[K‘[01m[KTransformBroadcaster[m[K’ is not a member of ‘[01m[Kros[m[K’
+   15 |   ros::[01;31m[KTransformBroadcaster[m[K tfbroadcaster;
+      |        [01;31m[K^~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/osboxes/Desktop/rp_workspace/ros_roboticarm/Ros_Code/src/RoboticArm_ServoPublisher/src/main.cpp:15:8:[m[K [01;36m[Knote: [m[Ksuggested alternatives:
+In file included from [01m[K/home/osboxes/Desktop/rp_workspace/ros_roboticarm/Ros_Code/src/RoboticArm_ServoPublisher/src/main.cpp:4[m[K:
+[01m[K/opt/ros/noetic/include/tf/transform_broadcaster.h:50:7:[m[K [01;36m[Knote: [m[K  ‘[01m[Ktf::TransformBroadcaster[m[K’
+   50 | class [01;36m[KTransformBroadcaster[m[K{
+      |       [01;36m[K^~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[K/opt/ros/noetic/include/tf/transform_broadcaster.h:39[m[K,
+                 from [01m[K/home/osboxes/Desktop/rp_workspace/ros_roboticarm/Ros_Code/src/RoboticArm_ServoPublisher/src/main.cpp:4[m[K:
+[01m[K/opt/ros/noetic/include/tf2_ros/transform_broadcaster.h:48:7:[m[K [01;36m[Knote: [m[K  ‘[01m[Ktf2_ros::TransformBroadcaster[m[K’
+   48 | class [01;36m[KTransformBroadcaster[m[K{
+      |       [01;36m[K^~~~~~~~~~~~~~~~~~~~[m[K
+make[2]: *** [CMakeFiles/RoboticArm_ServoPublisher_node.dir/build.make:63: CMakeFiles/RoboticArm_ServoPublisher_node.dir/src/main.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:185: CMakeFiles/RoboticArm_ServoPublisher_node.dir/all] Error 2
+make: *** [Makefile:141: all] Error 2

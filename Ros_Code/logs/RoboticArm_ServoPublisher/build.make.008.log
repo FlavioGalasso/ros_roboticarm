@@ -1,0 +1,18 @@
+[35m[1mScanning dependencies of target RoboticArm_ServoPublisher_node[0m
+[ 50%] [32mBuilding CXX object CMakeFiles/RoboticArm_ServoPublisher_node.dir/src/main.cpp.o[0m
+[01m[K/home/osboxes/Desktop/rp_workspace/ros_roboticarm/Ros_Code/src/RoboticArm_ServoPublisher/src/main.cpp:[m[K In function ‘[01m[Kint main(int, char**)[m[K’:
+[01m[K/home/osboxes/Desktop/rp_workspace/ros_roboticarm/Ros_Code/src/RoboticArm_ServoPublisher/src/main.cpp:71:25:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[Ktf::Transform::setOrigin(double&, int, int)[m[K’
+   71 |     tf1.setOrigin(l1,0,0[01;31m[K)[m[K;
+      |                         [01;31m[K^[m[K
+In file included from [01m[K/opt/ros/noetic/include/tf/transform_datatypes.h:41[m[K,
+                 from [01m[K/opt/ros/noetic/include/tf/time_cache.h:38[m[K,
+                 from [01m[K/opt/ros/noetic/include/tf/tf.h:44[m[K,
+                 from [01m[K/opt/ros/noetic/include/tf/transform_broadcaster.h:36[m[K,
+                 from [01m[K/home/osboxes/Desktop/rp_workspace/ros_roboticarm/Ros_Code/src/RoboticArm_ServoPublisher/src/main.cpp:4[m[K:
+[01m[K/opt/ros/noetic/include/tf/LinearMath/Transform.h:148:27:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Kvoid tf::Transform::setOrigin(const tf::Vector3&)[m[K’
+  148 |  TFSIMD_FORCE_INLINE void [01;36m[KsetOrigin[m[K(const Vector3& origin)
+      |                           [01;36m[K^~~~~~~~~[m[K
+[01m[K/opt/ros/noetic/include/tf/LinearMath/Transform.h:148:27:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 3 provided
+make[2]: *** [CMakeFiles/RoboticArm_ServoPublisher_node.dir/build.make:63: CMakeFiles/RoboticArm_ServoPublisher_node.dir/src/main.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:185: CMakeFiles/RoboticArm_ServoPublisher_node.dir/all] Error 2
+make: *** [Makefile:141: all] Error 2
