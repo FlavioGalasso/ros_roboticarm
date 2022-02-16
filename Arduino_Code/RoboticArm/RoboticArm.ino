@@ -7,6 +7,7 @@
 #define SERVO3_PIN 11
 #define SERVO4_PIN 10
 #define OMEGA_SPEED 1
+#define LOOPTIME_MS 10
 
 Servo l1;
 Servo l2;
@@ -27,6 +28,8 @@ int kq2 = 90;
 int kq3 = 90;
 int kq4 = 50;
 
+unsigned long looptime = 0;
+
 void servo1_cb( const std_msgs::UInt16& cmd_msg){
   req_kq1 = cmd_msg.data;
 }
@@ -45,7 +48,9 @@ void servo4_cb( const std_msgs::UInt16& cmd_msg){
 
 
 void updateq1(int kin_ang){
-  int s1 = 90-kin_ang;
+  int s1=90;
+  if(kin_ang >=0 && kin_ang <= 90) s1 = 90+kin_ang;
+  else if(kin_ang >= 270) s1=kin_ang - 270;
   l1.write(s1);
 }
 
@@ -86,7 +91,8 @@ void setup(){
 }
 
 void loop(){
-  nh.spinOnce();
+  looptime = millis();
+  
   if(req_kq1 > kq1) kq1 += OMEGA_SPEED;
   if(req_kq1 < kq1) kq1 -= OMEGA_SPEED;
   
@@ -98,10 +104,15 @@ void loop(){
 
   if(req_kq4 > kq4) kq4 += OMEGA_SPEED;
   if(req_kq4 < kq4) kq4 -= OMEGA_SPEED;
+  
+  nh.spinOnce();
 
   updateq1(kq1);
   updateq2(kq2);
   updateq3(kq3);
   updateq4(kq4);
+  
+  while(millis() - looptime < LOOPTIME_MS);
+  
   
 }
