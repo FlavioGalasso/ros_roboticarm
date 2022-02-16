@@ -18,11 +18,11 @@ int main(int argc, char **argv)
   ros::Publisher servo4pub = n.advertise<std_msgs::UInt16>("servo4", 1000);
   tf::TransformBroadcaster tfbroadcaster;
   ros::Rate loop_rate(10);
-
-  double l1 = 1;
-  double l2 = 2;
-  double l3 = 2;
-  double le = 1;
+  double h1 = 1.75;
+  double l1 = 0.3;
+  double l2 = 8.0;
+  double l3 = 8.0;
+  double le = 6.0;
   double q1 = 0;
   double q2 = 0;
   double q3 = 0;
@@ -36,25 +36,25 @@ int main(int argc, char **argv)
     std_msgs::UInt16 msg;
     int servocmd = 0;
     std::cin >> servocmd;
-    if(servocmd <= 2000 && servocmd >= 0){
+    if(servocmd < 2000 && servocmd >= 0){
         msg.data = servocmd - 1000;
         servo1pub.publish(msg);
         q1 = msg.data * toRadian;
         ROS_INFO("%d sent to servo 1", msg.data);
     }
-    if(servocmd <= 3000 && servocmd >= 2000){
+    if(servocmd < 3000 && servocmd >= 2000){
         msg.data = servocmd - 2000;
         servo2pub.publish(msg);
         q2 = msg.data * toRadian;
         ROS_INFO("%d sent to servo 2", msg.data);
     }
-    if(servocmd <= 4000 && servocmd >= 3000){
+    if(servocmd < 4000 && servocmd >= 3000){
         msg.data = servocmd - 3000;
         servo3pub.publish(msg);
         q3 = msg.data * toRadian;
         ROS_INFO("%d sent to servo 3", msg.data);
     }
-        if(servocmd <= 5000 && servocmd >= 4000){
+        if(servocmd < 5000 && servocmd >= 4000){
         msg.data = servocmd - 4000;
         servo4pub.publish(msg);
         q4 = msg.data;
@@ -68,24 +68,32 @@ int main(int argc, char **argv)
     tf::Transform tf3;
     tf::Transform tf4;
 
-    tf1.setOrigin(tf::Vector3(l1,0,0));
+    tf1.setOrigin(tf::Vector3(0,0,0));
     tf::Quaternion quat1;
-    quat1.setRPY(alpha1,0,q1);
+    quat1.setRPY(0,0,q1);
     tf1.setRotation(quat1);
     tfbroadcaster.sendTransform( tf::StampedTransform(tf1,ros::Time::now(), "/base_link", "/frame1"));
 
-    tf2.setOrigin(tf::Vector3(l2,0,0));
+    tf2.setOrigin(tf::Vector3(l1,0,h1));
     tf::Quaternion quat2;
-    quat2.setRPY(0,0,q2);
+    quat2.setRPY(alpha1,-q2,0);
     tf2.setRotation(quat2);
     tfbroadcaster.sendTransform( tf::StampedTransform(tf2,ros::Time::now(), "/frame1", "/frame2"));
 
-    tf3.setOrigin(tf::Vector3(l3+le,0,0));
+    tf3.setOrigin(tf::Vector3(l2,0,0));
     tf::Quaternion quat3;
-    q3 = -(q2+q3);
-    quat3.setRPY(0,0,q3);
+    double q3d = -(q2+q3);
+    quat3.setRPY(0,0,q3d);
     tf3.setRotation(quat3);
     tfbroadcaster.sendTransform( tf::StampedTransform(tf3,ros::Time::now(), "/frame2", "/frame3"));
+    
+    tf4.setOrigin(tf::Vector3(l3+le,0,0));
+    tf::Quaternion quat4;
+    quat4.setRPY(0,0,0);
+    tf4.setRotation(quat4);
+    tfbroadcaster.sendTransform( tf::StampedTransform(tf4,ros::Time::now(), "/frame3", "/frame4"));
+
+    ROS_INFO("q1: %f, q2: %f, q3: %f, q3d: %f\n", q1,q2,q3,q3d);
 
 
 
