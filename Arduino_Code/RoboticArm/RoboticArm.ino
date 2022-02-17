@@ -23,52 +23,53 @@ int req_kq2 = 90;
 int req_kq3 = 0;
 int req_kq4 = 50;
 
-int kq1 = 0;
-int kq2 = 90;
-int kq3 = 90;
-int kq4 = 50;
+int q1 = 0;
+int q2 = 90;
+int q3 = 0;
+int q4 = 50;
+
+bool wasConnected = false;
 
 unsigned long looptime = 0;
 
 void servo1_cb( const std_msgs::UInt16& cmd_msg){
   req_kq1 = cmd_msg.data;
+   kq1_to_q1(req_kq1);
 }
 
 void servo2_cb( const std_msgs::UInt16& cmd_msg){
   req_kq2 = cmd_msg.data;
+   kq2_to_q2(req_kq2);
 }
 
 void servo3_cb( const std_msgs::UInt16& cmd_msg){
   req_kq3 = cmd_msg.data;
+   kq3_to_q3(req_kq3);
 }
 
 void servo4_cb( const std_msgs::UInt16& cmd_msg){
   req_kq4 = cmd_msg.data;
+   kq4_to_q4(req_kq4);
 }
 
 
-void updateq1(int kin_ang){
-  int s1=90;
-  if(kin_ang >=0 && kin_ang <= 90) s1 = 90+kin_ang;
-  else if(kin_ang >= 270) s1=kin_ang - 270;
-  l1.write(s1);
+void kq1_to_q1(int &kin_ang){
+  if(kin_ang >= 270) kin_ang=kin_ang - 360;
+  kin_ang = 90+kin_ang;
 }
 
-void updateq2(int kin_ang){
-  int s2 = 180-kin_ang;
-  s2 = s2+s2*0.2;
-  l2.write(s2);
+void kq2_to_q2(int &kin_ang){
+  kin_ang = 180-kin_ang;
+  kin_ang = kin_ang+kin_ang*0.2;
 }
 
-void updateq3(int kin_ang){
-  int s3 = 180-kin_ang;
-  s3 = s3 +s3*0.13 -42;
-  l3.write(s3);
+void kq3_to_q3(int &kin_ang){
+  kin_ang = 180-kin_ang;
+  kin_ang = kin_ang +kin_ang*0.13 -42;
 }
 
-void updateq4(int kin_ang){
-  int s4 = -0.35*kin_ang + 55;
-  l4.write(s4);
+void kq4_to_q4(int &kin_ang){
+  kin_ang = -0.35*kin_ang + 55;
 }
 
 ros::NodeHandle  nh;
@@ -88,30 +89,62 @@ void setup(){
   l2.attach(SERVO2_PIN); 
   l3.attach(SERVO3_PIN); 
   l4.attach(SERVO4_PIN);
+
+  kq1_to_q1(req_kq1);
+  kq2_to_q2(req_kq2);
+  kq3_to_q3(req_kq3);
+  kq4_to_q4(req_kq4);
+
+  q1 = req_kq1;
+  q2 = req_kq2;
+  q3 = req_kq3;
+  q4=req_kq4;
 }
 
 void loop(){
   looptime = millis();
-  
-  if(req_kq1 > kq1) kq1 += OMEGA_SPEED;
-  if(req_kq1 < kq1) kq1 -= OMEGA_SPEED;
-  
-  if(req_kq2 > kq2) kq2 += OMEGA_SPEED;
-  if(req_kq2 < kq2) kq2 -= OMEGA_SPEED;
-  
-  if(req_kq3 > kq3) kq3 += OMEGA_SPEED;
-  if(req_kq3 < kq3) kq3 -= OMEGA_SPEED;
 
-  if(req_kq4 > kq4) kq4 += OMEGA_SPEED;
-  if(req_kq4 < kq4) kq4 -= OMEGA_SPEED;
+  if (!nh.connected()){
+    req_kq1 = 0;
+    req_kq2 = 90;
+    req_kq3 = 70;
+    req_kq4 = 50;
+    kq1_to_q1(req_kq1);
+    kq2_to_q2(req_kq2);
+    kq3_to_q3(req_kq3);
+    kq4_to_q4(req_kq4);
+    wasConnected = false;
+  }
+  else if(wasConnected == false){
+    wasConnected = true;
+    req_kq1 = 0;
+    req_kq2 = 90;
+    req_kq3 = 0;
+    req_kq4 = 50;
+    kq1_to_q1(req_kq1);
+    kq2_to_q2(req_kq2);
+    kq3_to_q3(req_kq3);
+    kq4_to_q4(req_kq4);
+  }
+  
+  if(req_kq1 > q1) q1 += OMEGA_SPEED;
+  if(req_kq1 < q1) q1 -= OMEGA_SPEED;
+  
+  if(req_kq2 > q2) q2 += OMEGA_SPEED;
+  if(req_kq2 < q2) q2 -= OMEGA_SPEED;
+  
+  if(req_kq3 > q3) q3 += OMEGA_SPEED;
+  if(req_kq3 < q3) q3 -= OMEGA_SPEED;
+
+  if(req_kq4 > q4) q4 += OMEGA_SPEED;
+  if(req_kq4 < q4) q4 -= OMEGA_SPEED;
+
+  l1.write(q1);
+  l2.write(q2);
+  l3.write(q3);
+  l4.write(q4);
   
   nh.spinOnce();
-
-  updateq1(kq1);
-  updateq2(kq2);
-  updateq3(kq3);
-  updateq4(kq4);
-  
   while(millis() - looptime < LOOPTIME_MS);
   
   
