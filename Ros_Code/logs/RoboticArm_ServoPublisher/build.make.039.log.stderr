@@ -1,0 +1,14 @@
+[01m[K/home/osboxes/Desktop/rp_workspace/ros_roboticarm/Ros_Code/src/RoboticArm_ServoPublisher/src/main.cpp:21:14:[m[K [01;31m[Kerror: [m[Kredefinition of ‘[01m[Kconst double q3Min2[m[K’
+   21 | const double [01;31m[Kq3Min2[m[K = 315;
+      |              [01;31m[K^~~~~~[m[K
+[01m[K/home/osboxes/Desktop/rp_workspace/ros_roboticarm/Ros_Code/src/RoboticArm_ServoPublisher/src/main.cpp:20:14:[m[K [01;36m[Knote: [m[K‘[01m[Kconst double q3Min2[m[K’ previously defined here
+   20 | const double [01;36m[Kq3Min2[m[K = 349;
+      |              [01;36m[K^~~~~~[m[K
+[01m[K/home/osboxes/Desktop/rp_workspace/ros_roboticarm/Ros_Code/src/RoboticArm_ServoPublisher/src/main.cpp:[m[K In function ‘[01m[Kint main(int, char**)[m[K’:
+[01m[K/home/osboxes/Desktop/rp_workspace/ros_roboticarm/Ros_Code/src/RoboticArm_ServoPublisher/src/main.cpp:94:40:[m[K [01;31m[Kerror: [m[K‘[01m[Kq3Max2[m[K’ was not declared in this scope; did you mean ‘[01m[Kq3Max[m[K’?
+   94 |         else if (q3 >= q3Min2 && q3 <= [01;31m[Kq3Max2[m[K)
+      |                                        [01;31m[K^~~~~~[m[K
+      |                                        [32m[Kq3Max[m[K
+make[2]: *** [CMakeFiles/RoboticArm_ServoPublisher_node.dir/build.make:63: CMakeFiles/RoboticArm_ServoPublisher_node.dir/src/main.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:185: CMakeFiles/RoboticArm_ServoPublisher_node.dir/all] Error 2
+make: *** [Makefile:141: all] Error 2
