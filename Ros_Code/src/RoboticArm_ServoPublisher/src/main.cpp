@@ -53,12 +53,18 @@ int main(int argc, char **argv)
   double q4 = 0;
   double alpha1 = Pi/2;
 
+  ROS_INFO("ROBOTARM CMD FOR JOINT TELE-OPERATION");
+  ROS_INFO("Usage: first number for selecting the joint (eg: 1XXX)");
+  ROS_INFO("last 3 numbers to select the joint angle (eg: first joint at 90° : 1090");
+
+
 
   while (ros::ok())
   {
 
     std_msgs::UInt16 msg;
     int servocmd = 0;
+    ROS_INFO("Enter CMD:");
     std::cin >> servocmd;
     if(servocmd < 2000 && servocmd >= 1000){
         q1 = servocmd - 1000;
