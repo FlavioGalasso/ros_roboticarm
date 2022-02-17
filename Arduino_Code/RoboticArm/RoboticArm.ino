@@ -63,9 +63,14 @@ void kq2_to_q2(int &kin_ang){
   kin_ang = kin_ang+kin_ang*0.2;
 }
 
-void kq3_to_q3(int &kin_ang){
-  kin_ang = 180-kin_ang;
-  kin_ang = kin_ang +kin_ang*0.13 -42;
+void kq3_to_q3(int &kin_ang){ 
+  if(kin_ang >= 315){
+    kin_ang = 180 - (kin_ang - 315)*0.42;
+  }
+  else{
+    kin_ang = 180-kin_ang;
+    kin_ang = kin_ang +kin_ang*0.13 -42;
+  }
 }
 
 void kq4_to_q4(int &kin_ang){
